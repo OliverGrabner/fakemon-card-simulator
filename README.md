@@ -10,7 +10,7 @@ This is a fun web simulator I built to showcase fake, DCGAN-generated Pokémon-l
 
 ## What I Learned
 
-My biggest challenge was getting the cards to rotate smoothly when hovered over. After lots of trial and error with CSS transitions and JavaScript events, I finally nailed the effect!
+My biggest challenge was getting the cards to rotate smoothly when hovered over. lots of trial and error with CSS and JavaScript events
 
 ## How to Run
 
