@@ -1,0 +1,414 @@
+/* css/style.css */
+
+/* Base Reset & Fonts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Navigation */
+header {
+  background: linear-gradient(90deg, #EE1515, #FFDE00); /* Bold Pokémon colors */
+  padding: 15px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #000;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, rgba(238,21,21,0.8), rgba(255,222,0,0.8)), url('../assets/images/pokemon-hero.jpg') no-repeat center center/cover;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 3px #000;
+}
+
+.hero p {
+  font-size: 1.4em;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background: linear-gradient(90deg, #EE1515, #FFDE00);
+  color: #fff;
+  padding: 12px 30px;
+  text-decoration: none;
+  font-size: 1.2em;
+  border-radius: 50px;
+  transition: background 0.3s, transform 0.3s;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #FFDE00, #EE1515);
+  transform: scale(1.05);
+}
+
+/* Card Slider Section */
+.card-slider {
+  overflow: hidden;
+  position: relative;
+  background: #f5f5f5;
+  padding: 10px 0;
+  margin: 20px 0;
+}
+
+.slider-track {
+  display: flex;
+  /* The track will naturally be as wide as its contents */
+  animation: scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.slider-track .slide {
+  flex: 0 0 auto;
+  margin: 0 10px;
+}
+
+.slider-track .slide img {
+  width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Animate the track from 0 to -100% of its own width */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+/* Overview Section */
+.overview {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #fff;
+  margin: 30px auto;
+  max-width: 1000px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.overview h2 {
+  font-family: 'Press Start 2P', cursive;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  color: #EE1515;
+}
+
+.overview p {
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  font-size: 1.1em;
+}
+
+.overview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Daily Pack Section */
+.daily-pack {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #fff;
+  margin: 30px auto;
+  max-width: 1200px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.daily-pack h1 {
+  margin-bottom: 20px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.8em;
+  color: #EE1515;
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Card Styles */
+.card {
+  width: 200px;
+  height: 275px;
+  perspective: 1000px;
+  margin: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-radius: 16px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 16px;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-front img,
+.card-back img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  position: relative;
+}
+
+/* Rarity Label */
+.rarity-label {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Rarity-specific colors for label */
+.card[data-rarity="common"] .rarity-label { background-color: #9e9e9e; }
+.card[data-rarity="uncommon"] .rarity-label { background-color: #4caf50; }
+.card[data-rarity="rare"] .rarity-label { background-color: #2196f3; }
+.card[data-rarity="epic"] .rarity-label { background-color: #9c27b0; }
+.card[data-rarity="legendary"] .rarity-label { background-color: #ff9800; }
+
+/* Favorite Icon */
+.favorite-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  transition: transform 0.2s;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.favorite-icon.favorited {
+  color: #ff6347;
+}
+
+/* Favorites Section */
+.favorites-section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #fff;
+  margin: 30px auto;
+  max-width: 1200px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.favorites-section h1 {
+  margin-bottom: 30px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.8em;
+  color: #FF9800;
+}
+
+#favorites-container {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Overlays for cards with rarity rare and above */
+/* Shimmer Effect for rare, epic, and legendary */
+.card[data-rarity="rare"] .card-back,
+.card[data-rarity="epic"] .card-back,
+.card[data-rarity="legendary"] .card-back {
+  position: relative;
+  overflow: hidden;
+}
+
+.card[data-rarity="rare"] .card-back::after,
+.card[data-rarity="epic"] .card-back::after,
+.card[data-rarity="legendary"] .card-back::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 20%);
+  transform: skewX(-25deg);
+  animation: shimmer 7s infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Rainbow Foil for epic and legendary (subtle) */
+.card[data-rarity="epic"] .card-back::before,
+.card[data-rarity="legendary"] .card-back::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 3;
+  animation: rainbowFoil 7s linear infinite;
+}
+
+/* Keyframes for shimmer */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-25deg);
+  }
+  100% {
+    transform: translateX(100%) skewX(-25deg);
+  }
+}
+
+/* Keyframes for rainbow foil */
+@keyframes rainbowFoil {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Flipped Card Border for Main Game Cards */
+.card.flip .card-back {
+  outline: 7px solid !important;
+  outline-offset: -7px !important;
+}
+
+/* Rarity-specific outline colors */
+.card.flip[data-rarity="common"] .card-back {
+  outline-color: #9e9e9e !important;
+}
+
+.card.flip[data-rarity="uncommon"] .card-back {
+  outline-color: #4caf50 !important;
+}
+
+.card.flip[data-rarity="rare"] .card-back {
+  outline-color: #2196f3 !important;
+}
+
+.card.flip[data-rarity="epic"] .card-back {
+  outline-color: #9c27b0 !important;
+}
+
+.card.flip[data-rarity="legendary"] .card-back {
+  outline-color: #ff9800 !important;
+}
+
+
+/* For favorited cards, force the card-back to be shown immediately with no transition */
+.favorited-card .card-inner {
+  transform: rotateY(180deg) !important;
+  transition: none !important;
+}
+
+
+/* Footer */
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5em;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  nav ul li {
+    margin: 10px 0;
+  }
+}
