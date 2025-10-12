@@ -1,203 +1,495 @@
-/* css/style.css */
+/* ___ design tokens ___ */
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-paper: #fafaf9;
+  --color-gray-100: #f5f5f4;
+  --color-gray-600: #57534e;
+  --color-gray-700: #44403c;
 
-/* Base Reset & Fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* spacing - 4px increments */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* hard drop shadows for that brutalist paper look */
+  --shadow-weighted: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-weighted-lg: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+}
+
+/* ___ base resets ___ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.6;
-  background-color: #f5f5f5;
-  color: #333;
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Navigation */
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-black);
+  background: var(--color-paper);
+  position: relative;
+}
+
+/* newspaper lines texture over the whole page */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 5px
+  );
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+/* ___ navigation ___ */
 header {
-  background: linear-gradient(90deg, #EE1515, #FFDE00); /* Bold Pokémon colors */
-  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--color-white);
+  border-bottom: 2px solid var(--color-black);
+}
+
+nav {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  justify-content: center;
-}
-
-nav ul li {
-  margin: 0 20px;
+  gap: var(--space-2);
+  align-items: center;
 }
 
 nav ul li a {
-  color: #fff;
+  color: var(--color-black);
   text-decoration: none;
-  font-size: 1.1em;
-  transition: color 0.3s;
+  font-size: 14px;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all 150ms ease;
 }
 
 nav ul li a:hover {
-  color: #000;
+  border-color: var(--color-black);
+  background: var(--color-gray-100);
 }
 
-/* Hero Section */
+nav ul li a.active {
+  border-color: var(--color-black);
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* ___ hero section ___ */
 .hero {
-  background: linear-gradient(135deg, rgba(238,21,21,0.8), rgba(255,222,0,0.8)), url('../assets/images/pokemon-hero.jpg') no-repeat center center/cover;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
+  padding: calc(64px + var(--space-20)) var(--space-8) var(--space-10);
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .hero-content {
-  max-width: 700px;
+  max-width: 800px;
 }
 
 .hero h1 {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 3.5em;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 3px #000;
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+  color: var(--color-black);
+}
+
+.hero h1 .accent {
+  display: inline-block;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
 }
 
 .hero p {
-  font-size: 1.4em;
-  margin-bottom: 30px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-8);
+  max-width: 600px;
 }
 
+/* ___ buttons ___ */
 .btn {
-  background: linear-gradient(90deg, #EE1515, #FFDE00);
-  color: #fff;
-  padding: 12px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-white);
+  color: var(--color-black);
   text-decoration: none;
-  font-size: 1.2em;
-  border-radius: 50px;
-  transition: background 0.3s, transform 0.3s;
-  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  border: 3px solid var(--color-black);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 150ms ease;
+  box-shadow: var(--shadow-weighted);
+  position: relative;
 }
 
+/* button gets pressed down on hover/click */
 .btn:hover {
-  background: linear-gradient(90deg, #FFDE00, #EE1515);
-  transform: scale(1.05);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
-/* Card Slider Section */
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* ___ card slider on homepage ___ */
 .card-slider {
+  padding: var(--space-12) 0;
+  margin: var(--space-12) 0 var(--space-20);
   overflow: hidden;
   position: relative;
-  background: #f5f5f5;
-  padding: 10px 0;
-  margin: 20px 0;
+  background: var(--color-gray-100);
+  border-top: 2px solid var(--color-black);
+  border-bottom: 2px solid var(--color-black);
+}
+
+/* fade out edges so it looks infinite */
+.card-slider::before,
+.card-slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.card-slider::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--color-gray-100), transparent);
+}
+
+.card-slider::after {
+  right: 0;
+  background: linear-gradient(-90deg, var(--color-gray-100), transparent);
 }
 
 .slider-track {
   display: flex;
-  /* The track will naturally be as wide as its contents */
-  animation: scroll 30s linear infinite;
+  gap: var(--space-6);
+  animation: scroll 50s linear infinite;
   will-change: transform;
 }
 
+.slider-track:hover {
+  animation-play-state: paused;
+}
+
 .slider-track .slide {
-  flex: 0 0 auto;
-  margin: 0 10px;
+  flex-shrink: 0;
 }
 
 .slider-track .slide img {
-  width: 150px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 200px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-black);
+  box-shadow: var(--shadow-weighted);
+  transition: all 200ms ease;
 }
 
-/* Animate the track from 0 to -100% of its own width */
+.slider-track .slide:hover img {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+}
+
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-
-/* Overview Section */
+/* ___ about section ___ */
 .overview {
-  padding: 60px 20px;
-  text-align: center;
-  background-color: #fff;
-  margin: 30px auto;
-  max-width: 1000px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: var(--space-20) auto;
+  padding: 0 var(--space-8);
+}
+
+.overview .fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.overview .fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .overview h2 {
-  font-family: 'Press Start 2P', cursive;
-  margin-bottom: 20px;
-  font-size: 2.5em;
-  color: #EE1515;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-4);
+  color: var(--color-black);
+  line-height: 1.2;
+}
+
+.overview h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: var(--space-16);
+  margin-bottom: var(--space-4);
+  color: var(--color-black);
+  line-height: 1.3;
+  position: relative;
+  padding-left: var(--space-6);
+}
+
+.overview h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 100%;
+  background: var(--color-black);
+  border-radius: 2px;
 }
 
 .overview p {
-  max-width: 800px;
-  margin: 0 auto 20px auto;
-  font-size: 1.1em;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-8);
+}
+
+.overview ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+}
+
+.overview ul li {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-gray-700);
+  padding: var(--space-3) 0 var(--space-3) var(--space-8);
+  position: relative;
+}
+
+.overview ul li::before {
+  content: '';
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--color-black);
+  border-radius: 50%;
 }
 
 .overview img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
+  margin: var(--space-8) 0;
+  border: 3px solid var(--color-black);
+  box-shadow: var(--shadow-weighted-lg);
 }
 
-/* Daily Pack Section */
+.overview a {
+  color: var(--color-black);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-black);
+  transition: opacity 150ms ease;
+}
+
+.overview a:hover {
+  opacity: 0.6;
+}
+
+/* Card Explorer Dropdown */
+.card-explorer {
+  margin-top: var(--space-20);
+  border: 3px solid var(--color-black);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  overflow: hidden;
+  box-shadow: var(--shadow-weighted-lg);
+}
+
+.explorer-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-6);
+  font-size: 24px;
+  font-weight: 800;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.explorer-toggle:hover {
+  background: var(--color-gray-100);
+  transform: none;
+}
+
+.explorer-toggle .arrow {
+  transition: transform 300ms ease;
+  font-size: 20px;
+}
+
+.explorer-toggle.active .arrow {
+  transform: rotate(180deg);
+}
+
+.explorer-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 400ms ease;
+  border-top: 0px solid var(--color-black);
+}
+
+.explorer-content.open {
+  max-height: 2000px;
+  border-top: 3px solid var(--color-black);
+}
+
+.explorer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-6);
+  padding: var(--space-8);
+}
+
+.explorer-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-black);
+  box-shadow: var(--shadow-weighted);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.explorer-grid img:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* ___ pack opening page ___ */
 .daily-pack {
-  padding: 40px 20px;
-  text-align: center;
-  background-color: #fff;
-  margin: 30px auto;
-  max-width: 1200px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1400px;
+  margin: calc(64px + var(--space-20)) auto var(--space-20);
+  padding: 0 var(--space-8);
 }
 
 .daily-pack h1 {
-  margin-bottom: 20px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 2.8em;
-  color: #EE1515;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-5);
+  color: var(--color-black);
+  line-height: 1.2;
 }
 
-/* Card Container */
+.daily-pack-message {
+  font-size: 18px;
+  color: var(--color-gray-600);
+  margin-bottom: var(--space-12);
+}
+
+.open-another-container {
+  margin-top: var(--space-12);
+}
+
+/* ___ pokemon cards ___ */
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-10);
+  margin-top: var(--space-12);
 }
 
-/* Card Styles */
 .card {
-  width: 200px;
-  height: 275px;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 220/302;
   perspective: 1000px;
-  margin: 15px;
-  position: relative;
   cursor: pointer;
-  transition: transform 0.3s;
-  border-radius: 16px;
+  transition: transform 200ms ease;
+  position: relative;
+  justify-self: start;
 }
 
+.card:hover {
+  transform: translate(2px, 2px);
+}
+
+/* 3d flip effect */
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  border-radius: 16px;
 }
 
 .card.flip .card-inner {
@@ -210,91 +502,136 @@ nav ul li a:hover {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.card-front {
+  background: var(--color-white);
+  border: 3px solid var(--color-black);
+  box-shadow: var(--shadow-weighted);
 }
 
 .card-front img,
 .card-back img {
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: calc(var(--radius-lg) - 3px);
+  object-fit: cover;
 }
 
 .card-back {
   transform: rotateY(180deg);
   position: relative;
+  border: 3px solid var(--color-black);
+  box-shadow: var(--shadow-weighted);
 }
 
-/* Rarity Label */
+/* rarity badges on cards */
 .rarity-label {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 3px;
-  font-size: 0.85em;
+  bottom: 10px;
+  right: 10px;
+  background: var(--color-white);
+  color: var(--color-black);
+  padding: 6px 12px;
+  border: 2px solid var(--color-black);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08em;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
-/* Rarity-specific colors for label */
-.card[data-rarity="common"] .rarity-label { background-color: #9e9e9e; }
-.card[data-rarity="uncommon"] .rarity-label { background-color: #4caf50; }
-.card[data-rarity="rare"] .rarity-label { background-color: #2196f3; }
-.card[data-rarity="epic"] .rarity-label { background-color: #9c27b0; }
-.card[data-rarity="legendary"] .rarity-label { background-color: #ff9800; }
+/* different colors for each rarity */
+.card[data-rarity="common"] .rarity-label {
+  background: #d4d4d4;
+  border-color: #9e9e9e;
+  color: #525252;
+}
+.card[data-rarity="uncommon"] .rarity-label {
+  background: #c8e6c9;
+  border-color: #4caf50;
+  color: #2e7d32;
+}
+.card[data-rarity="rare"] .rarity-label {
+  background: #bbdefb;
+  border-color: #2196f3;
+  color: #1565c0;
+}
+.card[data-rarity="epic"] .rarity-label {
+  background: #e1bee7;
+  border-color: #9c27b0;
+  color: #6a1b9a;
+}
+.card[data-rarity="legendary"] .rarity-label {
+  background: linear-gradient(135deg, #ffe0b2 0%, #ffccbc 25%, #f8bbd0 50%, #e1bee7 75%, #c5cae9 100%);
+  border-color: #ff9800;
+  color: #e65100;
+  box-shadow: 3px 3px 0px 0px rgba(255, 152, 0, 0.8);
+}
 
-/* Favorite Icon */
+/* favorite heart icon */
 .favorite-icon {
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
   font-size: 24px;
-  color: #fff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  color: var(--color-black);
+  background: var(--color-white);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--color-black);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
   z-index: 10;
-  transition: transform 0.2s;
+  transition: all 150ms ease;
 }
 
 .favorite-icon:hover {
-  transform: scale(1.1);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .favorite-icon.favorited {
-  color: #ff6347;
+  background: var(--color-black);
+  color: var(--color-white);
 }
 
-/* Favorites Section */
+/* ___ favorites page ___ */
 .favorites-section {
-  padding: 60px 20px;
-  text-align: center;
-  background-color: #fff;
-  margin: 30px auto;
-  max-width: 1200px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1400px;
+  margin: calc(64px + var(--space-20)) auto var(--space-20);
+  padding: 0 var(--space-8);
 }
 
 .favorites-section h1 {
-  margin-bottom: 30px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 2.8em;
-  color: #FF9800;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-12);
+  color: var(--color-black);
+  line-height: 1.2;
 }
 
 #favorites-container {
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-10);
 }
 
-/* Overlays for cards with rarity rare and above */
-/* Shimmer Effect for rare, epic, and legendary */
+#favorites-container > p {
+  font-size: 18px;
+  color: var(--color-gray-600);
+  width: 100%;
+}
+
+/* shimmer animation for rare/epic/legendary cards */
 .card[data-rarity="rare"] .card-back,
 .card[data-rarity="epic"] .card-back,
 .card[data-rarity="legendary"] .card-back {
@@ -311,31 +648,13 @@ nav ul li a:hover {
   left: -100%;
   width: 200%;
   height: 100%;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 20%);
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
   transform: skewX(-25deg);
-  animation: shimmer 7s infinite;
+  animation: shimmer 3s infinite;
   pointer-events: none;
   z-index: 2;
 }
 
-/* Rainbow Foil for epic and legendary (subtle) */
-.card[data-rarity="epic"] .card-back::before,
-.card[data-rarity="legendary"] .card-back::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  opacity: 0.35;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  z-index: 3;
-  animation: rainbowFoil 7s linear infinite;
-}
-
-/* Keyframes for shimmer */
 @keyframes shimmer {
   0% {
     transform: translateX(-100%) skewX(-25deg);
@@ -345,70 +664,167 @@ nav ul li a:hover {
   }
 }
 
-/* Keyframes for rainbow foil */
+/* rainbow foil overlay on legendary cards */
+.card[data-rarity="legendary"] .card-back::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg,
+    rgba(255, 0, 0, 0.15) 0%,
+    rgba(255, 154, 0, 0.15) 10%,
+    rgba(255, 255, 0, 0.15) 20%,
+    rgba(0, 255, 0, 0.15) 30%,
+    rgba(0, 127, 255, 0.15) 40%,
+    rgba(0, 0, 255, 0.15) 50%,
+    rgba(139, 0, 255, 0.15) 60%,
+    rgba(255, 0, 255, 0.15) 70%,
+    rgba(255, 0, 127, 0.15) 80%,
+    rgba(255, 0, 0, 0.15) 90%,
+    rgba(255, 154, 0, 0.15) 100%);
+  opacity: 0.6;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+  animation: rainbowFoil 7s linear infinite;
+}
+
 @keyframes rainbowFoil {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 
-/* Flipped Card Border for Main Game Cards */
+/* colored borders when cards are flipped */
 .card.flip .card-back {
-  outline: 7px solid !important;
-  outline-offset: -7px !important;
+  box-shadow: var(--shadow-weighted-lg);
 }
 
-/* Rarity-specific outline colors */
 .card.flip[data-rarity="common"] .card-back {
-  outline-color: #9e9e9e !important;
+  border-color: #9e9e9e;
 }
-
 .card.flip[data-rarity="uncommon"] .card-back {
-  outline-color: #4caf50 !important;
+  border-color: #4caf50;
 }
-
 .card.flip[data-rarity="rare"] .card-back {
-  outline-color: #2196f3 !important;
+  border-color: #2196f3;
 }
-
 .card.flip[data-rarity="epic"] .card-back {
-  outline-color: #9c27b0 !important;
+  border-color: #9c27b0;
 }
-
 .card.flip[data-rarity="legendary"] .card-back {
-  outline-color: #ff9800 !important;
+  border-color: #ff9800;
+  box-shadow: 6px 6px 0px 0px rgba(255, 152, 0, 0.8);
 }
 
-
-/* For favorited cards, force the card-back to be shown immediately with no transition */
 .favorited-card .card-inner {
   transform: rotateY(180deg) !important;
   transition: none !important;
 }
 
-
-/* Footer */
+/* ___ footer ___ */
 footer {
-  background: #333;
-  color: #fff;
+  border-top: 2px solid var(--color-black);
+  padding: var(--space-12) var(--space-8);
   text-align: center;
-  padding: 15px 0;
-  margin-top: 40px;
-  font-size: 0.9em;
+  margin-top: var(--space-24);
+  background: var(--color-white);
 }
 
-/* Responsive Design */
+footer p {
+  font-size: 14px;
+  color: var(--color-gray-600);
+  font-weight: 500;
+}
+
+/* ___ responsive breakpoints ___ */
+@media (max-width: 1024px) {
+  .hero,
+  .overview,
+  .daily-pack,
+  .favorites-section {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 2.5em;
+    font-size: 48px;
   }
+
+  .hero p {
+    font-size: 18px;
+  }
+
   nav ul {
-    flex-direction: column;
+    gap: var(--space-1);
   }
-  nav ul li {
-    margin: 10px 0;
+
+  nav ul li a {
+    font-size: 13px;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .overview h2 {
+    font-size: 36px;
+  }
+
+  .overview h3 {
+    font-size: 24px;
+  }
+
+  .explorer-toggle {
+    font-size: 20px;
+    padding: var(--space-5);
+  }
+
+  .explorer-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-4);
+    padding: var(--space-6);
+  }
+
+  .daily-pack h1,
+  .favorites-section h1 {
+    font-size: 40px;
+  }
+
+  .card-container,
+  #favorites-container {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .slider-track .slide img {
+    width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  nav {
+    padding: 0 var(--space-4);
+  }
+
+  .hero,
+  .overview,
+  .daily-pack,
+  .favorites-section {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .btn {
+    padding: var(--space-3) var(--space-6);
+    font-size: 14px;
   }
 }

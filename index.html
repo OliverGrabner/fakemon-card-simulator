@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Faké-mon Card Packs Simulator</title>
-  <!-- Google Fonts: Roboto for body, Press Start 2P for headings (Pokémon-inspired) -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700|Press+Start+2P&display=swap" rel="stylesheet" />
+  <title>Fakémon Card Simulator - AI-Generated Pokemon Cards</title>
+  <meta name="description" content="Open AI-generated Pokemon card packs powered by DCGAN. Free daily packs with unique, AI-created creatures." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,7 +15,7 @@
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="game.html">Play Game</a></li>
+        <li><a href="game.html">Open Pack</a></li>
         <li><a href="favorites.html">Favorites</a></li>
       </ul>
     </nav>
@@ -22,115 +24,103 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Fakémon Card Pack Simulator</h1>
-      <p>Simulate opening a card pack containing GAN generative cards</p>
-      <a class="btn" href="game.html">Open Daily Pack</a>
+      <h1>
+        Open AI-generated <span class="accent">Pokémon</span> card packs
+      </h1>
+      <p>Free daily packs with unique cards created by a DCGAN trained on 11,000+ real Pokemon cards. Trained on my laptop so images are not the crispiest :&#41; </p>
+      <a class="btn" href="game.html">Open Your Pack</a>
     </div>
   </section>
 
   <!-- Card Slider Section -->
   <section class="card-slider">
     <div class="slider-track">
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1.png" alt="Card 1"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1012.png" alt="Card 1012"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1046.png" alt="Card 1046"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1047.png" alt="Card 1047"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1048.png" alt="Card 1048"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1052.png" alt="Card 1052"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1078.png" alt="Card 1078"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_109.png" alt="Card 109"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1106.png" alt="Card 1106"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_117.png" alt="Card 117"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_122.png" alt="Card 122"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1.png" alt="Card 1"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1012.png" alt="Card 1012"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1046.png" alt="Card 1046"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1047.png" alt="Card 1047"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1048.png" alt="Card 1048"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1052.png" alt="Card 1052"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1078.png" alt="Card 1078"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_109.png" alt="Card 109"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1106.png" alt="Card 1106"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_117.png" alt="Card 117"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_122.png" alt="Card 122"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1.png" alt="Card 1"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1012.png" alt="Card 1012"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1046.png" alt="Card 1046"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1047.png" alt="Card 1047"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1048.png" alt="Card 1048"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1052.png" alt="Card 1052"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1078.png" alt="Card 1078"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_109.png" alt="Card 109"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1106.png" alt="Card 1106"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_117.png" alt="Card 117"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_122.png" alt="Card 122"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1.png" alt="Card 1"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1012.png" alt="Card 1012"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1046.png" alt="Card 1046"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1047.png" alt="Card 1047"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1048.png" alt="Card 1048"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1052.png" alt="Card 1052"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1078.png" alt="Card 1078"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_109.png" alt="Card 109"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_1106.png" alt="Card 1106"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_117.png" alt="Card 117"></div>
-      <div class="slide"><img src="assets/images/generated_cards/generated_image_122.png" alt="Card 122"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1012.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1046.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1047.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1048.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1052.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1078.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_109.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1106.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_117.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_122.png" alt="Generated Card"></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1012.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1046.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1047.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1048.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1052.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1078.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_109.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_1106.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_117.png" alt="Generated Card"></div>
+      <div class="slide"><img src="assets/images/generated_cards/generated_image_122.png" alt="Generated Card"></div>
     </div>
   </section>
 
-
-  <!-- About Section (incorporating README content) -->
+  <!-- About Section -->
   <section class="overview">
-    <h2>About the Project</h2>
-    <p>
-      <strong>Hi! I'm Oliver, the creator of this website.</strong><br>
-      In this project I tried to generate Pokémon-like cards using a DCGAN architecture. I hope you have fun trying out the simulator and opening the packs! 😊
-    </p>
-    <p>
-      🃏 <strong>DCGAN Pokémon Card Generator</strong><br>
-      🎨 Generate traditional-style Pokémon cards using Deep Convolutional Generative Adversarial Networks (DCGANs).
-    </p>
-    <img src="assets/images/progress_pics/4x5.png" alt="Generated Card Sample" />
-    
-    <h3>📖 Overview</h3>
-    <p>
-      This project utilizes a DCGAN to create realistic Pokémon cards, focusing on traditional designs from the Pokémon Trading Card Game.
-      The model generates visually convincing cards by training on a dataset of over 11,000 card images spanning all generations (excluding full-art types) to maintain a classic card format.
-    </p>
-    
-    <h3>🚀 Features</h3>
-    <ul>
-      <li>Generate unique, traditional-style Pokémon card designs.</li>
-      <li>Trained on a dataset of over 11,000+ Pokémon cards with consistent rectangular dimensions (600x825 pixels).</li>
-      <li>Built with PyTorch and trained on an NVIDIA GeForce RTX 3050 (4GB).</li>
-    </ul>
-    
-    <h3>🖼️ Dataset</h3>
-    <p>
-      <strong>Source:</strong> <a href="https://github.com/PokemonTCG/pokemon-tcg-data" target="_blank">Pokemon TCG Dataset</a><br>
-      <strong>Size:</strong> 11,044 preprocessed images<br>
-      <strong>Preprocessing:</strong> Verified for validity, resized to 600x825 pixels, and converted to RGB.
-    </p>
-    <img src="assets/images/progress_pics/output.png" alt="Training Data Sample" />
-    
-    <h3>🧠 Model Architecture</h3>
-    <p>
-      <strong>Generator:</strong> Accepts a 100-dimensional latent vector and outputs a full-color image using 5 transposed convolutional layers, batch normalization, and Tanh activation.<br>
-      <strong>Discriminator:</strong> Classifies images as real or fake using 5 convolutional layers with Leaky ReLU activations and a Sigmoid output.
-    </p>
-    
-    <h3>📊 Results</h3>
-    <p>
-      The training losses of the Generator and Discriminator as well as a Turing test comparing real vs. generated cards are documented below.
-    </p>
-    <img src="assets/images/progress_pics/Loss_training.png" alt="Loss Graph" />
-    <img src="assets/images/progress_pics/real_vs_fake.png" alt="Real vs Fake" />
+    <div class="fade-up">
+      <h2>About this project</h2>
+      <p>
+        Hi, my name is Oliver. I built this Pokemon card generator using a DCGAN trained on 11,000+ real cards. At this time of making this, I was very interested in Deep learning and had looked at the DCGAN Architecture paper. I also around the same time discovered the dataset of all pokemon card images. Combining the two, I decided I could make my own pokemon cards in this fusion of two interests!
+      </p>
+    </div>
 
-    
+    <div class="fade-up">
+      <img src="assets/images/progress_pics/4x5.png" alt="Sample generated cards" />
+    </div>
+
+    <div class="fade-up">
+      <h3>The technology</h3>
+      <p>
+        This uses a Deep Convolutional Generative Adversarial Network (DCGAN). Two neural networks compete: one generates fake cards, the other tries to detect them. Reward functions are mapped based on how deceptful and how accurate a guess was.  After thousands of rounds, the generator starts getting good enough to create realistic looking pokemon cards!
+      </p>
+    </div>
+
+    <div class="fade-up">
+      <h3>Training data</h3>
+      <p>
+        The model learned from 11,044 Pokemon TCG cards from the github <a href="https://github.com/PokemonTCG/pokemon-tcg-data" target="_blank">Pokemon TCG Dataset</a>. All cards were preprocessed to 600x825 pixels and filtered to only include traditional rectangular designs (no full-art cards). I removed all EX, MEGA and other cards. 
+      </p>
+      <img src="assets/images/progress_pics/output.png" alt="Training dataset sample" />
+    </div>
+
+    <div class="fade-up">
+      <h3>Technical specs</h3>
+      <ul>
+        <li>PyTorch</li>
+        <li>Trained on NVIDIA GeForce RTX 3050 (4GB VRAM) (Trained on my laptop for 13 hours )</li>
+        <li>Generator: 100D latent vector → 5 transposed conv layers → full-color image</li>
+        <li>Discriminator: 5 conv layers with Leaky ReLU → real/fake classification</li>
+      </ul>
+    </div>
+
+    <div class="fade-up">
+      <h3>Results & Loss Graph</h3>
+      <img src="assets/images/progress_pics/Loss_training.png" alt="Training loss graph" />
+      <img src="assets/images/progress_pics/real_vs_fake.png" alt="Real vs fake comparison" />
+    </div>
+
+    <!-- Card Explorer Dropdown -->
+    <div class="card-explorer fade-up">
+      <button class="explorer-toggle btn" id="explorer-toggle">
+        Explore All Generated Cards
+        <span class="arrow">▼</span>
+      </button>
+      <div class="explorer-content" id="explorer-content">
+        <div class="explorer-grid">
+          <!-- Cards will be dynamically loaded here -->
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 DCGAN Pokémon Card Generator. Not affiliated with Nintendo Pokémon</p>
+    <p>&copy; 2025 Fakémon Card Simulator. Not affiliated with Nintendo or The Pokémon Company.</p>
   </footer>
 
   <script src="js/main.js"></script>

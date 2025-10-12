@@ -1,4 +1,4 @@
-// List of generated card images (ensure these exist in the specified folder)
+// List of generated card images
 const cardImages = [
   'assets/images/generated_cards/generated_image_1.png',
   'assets/images/generated_cards/generated_image_1012.png',
@@ -243,6 +243,30 @@ function loadFavorites() {
   attachCardEventListeners();
 }
 
+// Card Explorer Dropdown
+function setupCardExplorer() {
+  const toggleBtn = document.getElementById('explorer-toggle');
+  const explorerContent = document.getElementById('explorer-content');
+  const explorerGrid = document.querySelector('.explorer-grid');
+
+  if (!toggleBtn || !explorerContent || !explorerGrid) return;
+
+  // Toggle dropdown
+  toggleBtn.addEventListener('click', function() {
+    toggleBtn.classList.toggle('active');
+    explorerContent.classList.toggle('open');
+  });
+
+  // Load all generated cards into the explorer
+  cardImages.forEach(imagePath => {
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = 'Generated Card';
+    img.loading = 'lazy';
+    explorerGrid.appendChild(img);
+  });
+}
+
 // Single DOMContentLoaded event to initialize everything
 document.addEventListener("DOMContentLoaded", () => {
   // If we're on the game page, generate a new pack.
@@ -253,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById('favorites-container')) {
     loadFavorites();
   }
-  
+
   // Attach event listener to "Open Another Pack" button (if on game page)
   const openAnotherBtn = document.getElementById('open-another');
   if (openAnotherBtn) {
@@ -262,4 +286,55 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelector('.card-container').scrollIntoView({ behavior: "smooth" });
     });
   }
+
+  // Add scroll effect to header
+  const header = document.querySelector('header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
+
+  // Add active class to current page nav link
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+  });
+
+  // Setup card explorer dropdown (if on home page)
+  if (document.getElementById('explorer-toggle')) {
+    setupCardExplorer();
+  }
+
+  // Setup fade-up animations for overview section
+  setupFadeUpAnimations();
 });
+
+// Fade-up animation on scroll
+function setupFadeUpAnimations() {
+  const fadeUpElements = document.querySelectorAll('.fade-up');
+
+  if (fadeUpElements.length === 0) return;
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  fadeUpElements.forEach(el => observer.observe(el));
+}
