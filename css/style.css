@@ -232,7 +232,7 @@ nav ul li a.active {
 .slider-track {
   display: flex;
   gap: var(--space-6);
-  animation: scroll 50s linear infinite;
+  animation: scroll 40s linear infinite;
   will-change: transform;
 }
 
