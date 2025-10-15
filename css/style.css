@@ -160,6 +160,12 @@ nav ul li a.active {
   max-width: 600px;
 }
 
+.hero-buttons {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
 /* ___ buttons ___ */
 .btn {
   display: inline-flex;
@@ -264,15 +270,42 @@ nav ul li a.active {
   padding: 0 var(--space-8);
 }
 
-.overview .fade-up {
+/* ___ fade-down animation (global) ___ */
+.fade-up {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(-20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.overview .fade-up.visible {
+.fade-up.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Staggered delays for sequential animations */
+.fade-up.delay-1 {
+  transition-delay: 0.15s;
+}
+
+.fade-up.delay-2 {
+  transition-delay: 0.3s;
+}
+
+.fade-up.delay-3 {
+  transition-delay: 0.45s;
+}
+
+/* Card-specific animation - scale + fade */
+.card-appear {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: 0.4s;
+}
+
+.card-appear.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .overview h2 {
@@ -826,5 +859,96 @@ footer p {
   .btn {
     padding: var(--space-3) var(--space-6);
     font-size: 14px;
+  }
+}
+
+/* ___ AI Generator Two-Column Layout ___ */
+.generator-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-8);
+  min-height: calc(100vh - 64px - 100px);
+  padding-top: 160px;
+}
+
+.generator-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-12);
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left side: Controls */
+.generator-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  justify-content: center;
+}
+
+.generator-left h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+  color: var(--color-black);
+}
+
+.generator-description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-gray-700);
+  margin: 0;
+  max-width: 500px;
+}
+
+/* Right side: Card Display at 2x size */
+.generator-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+}
+
+.card-display {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card in generator is 1.5x size */
+.card-display .card {
+  transform: scale(1.5);
+  margin: var(--space-24);
+  transition: transform 0.3s ease;
+}
+
+/* On hover, scale down to normal size */
+.card-display .card:hover {
+  transform: scale(1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .generator-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  .card-display .card {
+    transform: scale(1.5);
+  }
+}
+
+@media (max-width: 640px) {
+  .generator-left h1 {
+    font-size: 36px;
+  }
+
+  .card-display .card {
+    transform: scale(1.2);
   }
 }

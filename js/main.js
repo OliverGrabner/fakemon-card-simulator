@@ -1,4 +1,3 @@
-// List of generated card images
 const cardImages = [
   'assets/images/generated_cards/generated_image_1.png',
   'assets/images/generated_cards/generated_image_1012.png',
@@ -56,12 +55,10 @@ function getRandomRarity() {
   else return 'Legendary';
 }
 
-// Helper: pick a random element from an array
 function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// Get a random card object with image and weighted rarity
 function getRandomCard() {
   return {
     image: getRandomElement(cardImages),
@@ -69,7 +66,6 @@ function getRandomCard() {
   };
 }
 
-// Generate a pack of cards (default: 10)
 function generateDailyPack(packSize = 10) {
   const packContainer = document.querySelector('.card-container');
   if (!packContainer) return;
@@ -97,12 +93,9 @@ function generateDailyPack(packSize = 10) {
   attachCardEventListeners();
 }
 
-/* Tilt effect applied to a card.
-   We now check if the card itself has the 'flip' class, rather than cardInner.
-*/
 function attachTiltEffect(card) {
   const cardInner = card.querySelector('.card-inner');
-  
+
   card.addEventListener('mousemove', function(e) {
     cardInner.style.transition = 'transform 0.6s ease-out';
     const rect = card.getBoundingClientRect();
@@ -115,10 +108,10 @@ function attachTiltEffect(card) {
     const percentX = deltaX / centerX;
     const percentY = deltaY / centerY;
     const maxTilt = 25;
-    const tiltX = -percentY * maxTilt;
+    const tiltX = percentY * maxTilt;
     const tiltY = percentX * maxTilt;
-    
-    // If the .card is flipped, rotateY(180deg) first
+
+    // Keep the card flipped if it's already flipped
     let transformString = card.classList.contains('flip') ? 'rotateY(180deg) ' : '';
     transformString += `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
     cardInner.style.transform = transformString;
@@ -126,7 +119,6 @@ function attachTiltEffect(card) {
 
   card.addEventListener('mouseleave', function() {
     cardInner.style.transition = 'transform 0.6s ease-out';
-    // If the .card is flipped, revert to rotateY(180deg), otherwise 0
     if (card.classList.contains('flip')) {
       cardInner.style.transform = 'rotateY(180deg)';
     } else {
@@ -135,14 +127,9 @@ function attachTiltEffect(card) {
   });
 }
 
-/* Attach event listeners for tilt, hover (scale), flip, and favorite.
-   For cards with the "favorited-card" class (favorites page), we do not attach the flip (click) event,
-   so they remain in the revealed state.
-*/
 function attachCardEventListeners() {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
-    // Hover scale effect (applies to all cards)
     card.addEventListener('mouseenter', function() {
       card.style.transition = 'transform 0.3s ease';
       card.style.transform = 'scale(1.1)';
@@ -317,11 +304,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setupFadeUpAnimations();
 });
 
-// Fade-up animation on scroll
+// Fade-up and card-appear animations on scroll
 function setupFadeUpAnimations() {
-  const fadeUpElements = document.querySelectorAll('.fade-up');
+  const animatedElements = document.querySelectorAll('.fade-up, .card-appear');
 
-  if (fadeUpElements.length === 0) return;
+  if (animatedElements.length === 0) return;
 
   const observerOptions = {
     threshold: 0.1,
@@ -336,5 +323,5 @@ function setupFadeUpAnimations() {
     });
   }, observerOptions);
 
-  fadeUpElements.forEach(el => observer.observe(el));
+  animatedElements.forEach(el => observer.observe(el));
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Generate - Fakémon Card Simulator</title>
+  <meta name="description" content="Generate unique AI-powered Pokemon cards using DCGAN technology in real-time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="game.html">Open Pack</a></li>
+        <li><a href="generate.html">Generate</a></li>
+        <li><a href="favorites.html">Favorites</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="generator-layout">
+    <div class="generator-container">
+      <!-- Left Side: Controls -->
+      <div class="generator-left">
+        <div class="fade-up">
+          <h1>Generate a new Pokemon Card</h1>
+        </div>
+
+        <div class="fade-up delay-1">
+          <p class="generator-description">
+            Each card is generated in real-time by a Deep Convolutional GAN (DCGAN) trained on 11,000+ real Pokemon cards.
+            The neural network creates completely unique designs that have never existed before.
+          </p>
+        </div>
+
+        <div class="fade-up delay-2">
+          <button id="generate-btn" class="btn">Generate Card</button>
+        </div>
+
+        <div id="loading" class="fade-up delay-2" style="display: none; margin-top: 20px;">
+          <p style="font-size: 1em; color: #666;">Generating your unique card...</p>
+        </div>
+      </div>
+
+      <!-- Right Side: Card Display (2x size) -->
+      <div class="generator-right">
+        <div id="generated-card" class="card-display card-appear">
+          <!-- Generated card will appear here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fakémon Card Simulator. Not affiliated with Nintendo or The Pokémon Company.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/generate.js"></script>
+</body>
+</html>

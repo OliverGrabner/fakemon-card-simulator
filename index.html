@@ -16,6 +16,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="game.html">Open Pack</a></li>
+        <li><a href="generate.html">Generate</a></li>
         <li><a href="favorites.html">Favorites</a></li>
       </ul>
     </nav>
@@ -24,11 +25,14 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1>
+      <h1 class="fade-up">
         Open AI-generated <span class="accent">Pokémon</span> card packs
       </h1>
-      <p>Free daily packs with unique cards created by a DCGAN trained on 11,000+ real Pokemon cards. Trained on my laptop so images are not the crispiest :&#41; </p>
-      <a class="btn" href="game.html">Open Your Pack</a>
+      <p class="fade-up delay-1">Free daily packs with unique cards created by a DCGAN trained on 11,000+ real Pokemon cards. Trained on my laptop so images are not the crispiest :&#41; </p>
+      <div class="hero-buttons fade-up delay-2">
+        <a class="btn" href="game.html">Open Your Pack</a>
+        <a class="btn" href="generate.html">Generate Card</a>
+      </div>
     </div>
   </section>
 
@@ -66,7 +70,7 @@
     <div class="fade-up">
       <h2>About this project</h2>
       <p>
-        Hi, my name is Oliver. I built this Pokemon card generator using a DCGAN trained on 11,000+ real cards. At this time of making this, I was very interested in Deep learning and had looked at the DCGAN Architecture paper. I also around the same time discovered the dataset of all pokemon card images. Combining the two, I decided I could make my own pokemon cards in this fusion of two interests!
+        Hi 👋, my name is Oliver! I built this Pokemon card generator using a DCGAN trained on 11,000+ real cards. At this time of making this, I was very interested in Deep learning and had looked at the DCGAN Architecture paper. I also around the same time discovered the dataset of all pokemon card images. Combining the two, I decided I could make my own pokemon cards in this fusion of two interests!
       </p>
     </div>
 
@@ -108,7 +112,7 @@
     <!-- Card Explorer Dropdown -->
     <div class="card-explorer fade-up">
       <button class="explorer-toggle btn" id="explorer-toggle">
-        Explore All Generated Cards
+        Explore Cached Card Generations
         <span class="arrow">▼</span>
       </button>
       <div class="explorer-content" id="explorer-content">
