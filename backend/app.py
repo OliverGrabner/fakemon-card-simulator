@@ -7,12 +7,16 @@ import base64
 from PIL import Image
 from models import Generator, nz
 import random
+import os
 
 app = FastAPI()
 
+# Get allowed origins from environment variable, fallback to localhost for development
+ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "http://localhost:3000,http://localhost:5500,http://127.0.0.1:5500").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS + ["*"],  # Allow configured origins plus wildcard for development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

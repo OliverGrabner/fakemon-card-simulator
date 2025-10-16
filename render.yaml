@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: fakemon-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    plan: free
+    healthCheckPath: /
+    autoDeploy: true
