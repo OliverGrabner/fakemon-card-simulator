@@ -1,5 +1,3 @@
-const API_URL = 'https://fakemon-card-simulator.onrender.com';
-
 async function generateCard() {
     const button = document.getElementById('generate-btn');
     const cardContainer = document.getElementById('generated-card');

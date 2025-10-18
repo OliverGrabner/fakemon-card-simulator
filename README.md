@@ -85,18 +85,3 @@ Some things I'd like to add if I come back to this:
 ## License
 
 This is a project for educational perposes only. The Pokémon name and TCG card designs are trademarks of Nintendo/The Pokémon Company. I do not own any of the designs trained on. (Lawsuit Avoided)
-
-## Tech Stack 
-
-| Category | Technology |
-|----------|-----------|
-| **Frontend** | HTML5, CSS3, JavaScript (Vanilla) |
-| **Backend** | Python 3.11, FastAPI, Uvicorn |
-| **ML Framework** | PyTorch  |
-| **Model** | DCGAN (5-layer Generator/Discriminator) |
-| **Image Processing** | Pillow (PIL) |
-| **Containerization** | Docker |
-| **Frontend Host** | Vercel (Edge Network) |
-| **Backend Host** | Render (Docker Container) |
-| **CI/CD** | GitHub Integration (auto-deploy) |
-| **APIs** | REST (JSON), Fetch API, localStorage |
