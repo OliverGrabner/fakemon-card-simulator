@@ -29,15 +29,15 @@ The cards aren't super crisp because I trained the model on my laptop (NVIDIA RT
 ## Technical Architecture
 
 **Frontend (Vercel):**
-- Vanilla JavaScript (no frameworks - wanted to keep it simple)
-- CSS3 with 3D transforms for the card flip animations
+- Vanilla JavaScript 
+- CSS3 with 3D transform animations
 - Hosted on Vercel for free
 
 **Backend (Render):**
 - FastAPI server running PyTorch for model inference
-- Takes random noise, runs it through the Generator network, and returns a base64 image
+- Runs random noise through the Generator network, and returns a base64 image
 - Dockerized and deployed on Render's free tier
-- Also assigns a random rarity (Common, Uncommon, Rare, Epic, Legendary)
+- Assigns a random rarity (Common, Uncommon, Rare, Epic, Legendary)
 
 When you click "Generate Card" on the website, your browser sends a request to the backend, which generates a completely new card on the spot and sends it back.
 
