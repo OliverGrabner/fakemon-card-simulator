@@ -1,24 +1,3 @@
-// Backend API configuration
-const API_URL = 'https://fakemon-card-simulator.onrender.com';
-
-// Wake up the backend server as soon as possible to avoid cold start delays
-async function warmupBackend() {
-  try {
-    // Silent health check to wake up Render's free tier
-    await fetch(`${API_URL}/`, {
-      method: 'GET',
-      mode: 'cors'
-    });
-    console.log('Backend warmup initiated');
-  } catch (error) {
-    // Silently fail - don't disrupt user experience
-    console.log('Backend warmup failed (this is ok):', error.message);
-  }
-}
-
-// Call warmup immediately when script loads
-warmupBackend();
-
 const cardImages = [
   'assets/images/generated_cards/generated_image_1.png',
   'assets/images/generated_cards/generated_image_1012.png',
@@ -275,8 +254,31 @@ function setupCardExplorer() {
   });
 }
 
+// Backend API configuration
+const API_URL = 'https://fakemon-card-simulator.onrender.com';
+
+// Wake up the backend server (only on homepage to avoid conflicts)
+async function warmupBackend() {
+  try {
+    // Silent health check to wake up Render's free tier
+    await fetch(`${API_URL}/`, {
+      method: 'GET',
+      mode: 'cors'
+    });
+    console.log('Backend warmup initiated');
+  } catch (error) {
+    // Silently fail - don't disrupt user experience
+    console.log('Backend warmup failed (this is ok):', error.message);
+  }
+}
+
 // Single DOMContentLoaded event to initialize everything
 document.addEventListener("DOMContentLoaded", () => {
+  // If we're on the homepage (has .hero section), warm up the backend
+  if (document.querySelector('.hero')) {
+    warmupBackend();
+  }
+
   // If we're on the game page, generate a new pack.
   if (document.querySelector('.card-container')) {
     generateDailyPack();
