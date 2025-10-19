@@ -257,22 +257,21 @@ function setupCardExplorer() {
 // Backend API configuration
 const API_URL = 'https://fakemon-card-simulator.onrender.com';
 
-// Wake up the backend server (only on homepage to avoid conflicts)
+// health check and wakeup of free tier booting (30 sec)
 async function warmupBackend() {
   try {
-    // Silent health check to wake up Render's free tier
     await fetch(`${API_URL}/`, {
       method: 'GET',
       mode: 'cors'
     });
     console.log('Backend warmup initiated');
   } catch (error) {
-    // Silently fail - don't disrupt user experience
+    // silently fail 
     console.log('Backend warmup failed (this is ok):', error.message);
   }
 }
 
-// Single DOMContentLoaded event to initialize everything
+//  DOMContentLoaded event to initialize everything
 document.addEventListener("DOMContentLoaded", () => {
   // If we're on the homepage (has .hero section), warm up the backend
   if (document.querySelector('.hero')) {
@@ -297,18 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Add scroll effect to header
-  const header = document.querySelector('header');
-  if (header) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-  }
-
   // Add active class to current page nav link
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const navLinks = document.querySelectorAll('nav a');
@@ -318,16 +305,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Setup card explorer dropdown (if on home page)
+  // Card explorer dropdown on home page 
   if (document.getElementById('explorer-toggle')) {
     setupCardExplorer();
   }
 
-  // Setup fade-up animations for overview section
+  // On scroll make elements appear 
   setupFadeUpAnimations();
 });
 
-// Fade-up and card-appear animations on scroll
+// Fade up and card appear animations on scroll
 function setupFadeUpAnimations() {
   const animatedElements = document.querySelectorAll('.fade-up, .card-appear');
 

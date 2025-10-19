@@ -1,4 +1,4 @@
-/* ___ design tokens ___ */
+/* ___ design tokesn ______ */
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
@@ -9,7 +9,7 @@
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 
-  /* spacing - 4px increments */
+  /* spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -23,7 +23,7 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  /* hard drop shadows for that brutalist paper look */
+  /* hard drop shadows  */
   --shadow-weighted: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   --shadow-weighted-lg: 6px 6px 0px 0px rgba(0, 0, 0, 1);
 

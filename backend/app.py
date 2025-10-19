@@ -1,22 +1,24 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
+
+from models import Generator, nz
 import torch
+import random
+
 import io
 import base64
 from PIL import Image
-from models import Generator, nz
-import random
 import os
 
 app = FastAPI()
 
-# Get allowed origins from environment variable, fallback to localhost for development
-ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "http://localhost:3000,http://localhost:5500,http://127.0.0.1:5500").split(",")
+# Get allowed origins from environment variable, fallback to localhost for devlop
+ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "http://localhost:5500,http://127.0.0.1:5500").split(",")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS + ["*"],  # Allow configured origins plus wildcard for development
+    allow_origins=ALLOWED_ORIGINS, # only allow api requests from vercel frontend 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
