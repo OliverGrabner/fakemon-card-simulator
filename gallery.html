@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MFM69P7D');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Gallery - Fakémon Card Simulator</title>
+  <meta name="description" content="Browse AI-generated Pokemon cards shared by the community. Upvote your favorites!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFM69P7D"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="game.html">Open Pack</a></li>
+        <li><a href="generate.html">Generate</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="favorites.html">Favorites</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="gallery-section">
+    <div class="gallery-header fade-up">
+      <h1>Community Gallery</h1>
+      <p>Cards shared by users from around the world</p>
+    </div>
+
+    <div class="gallery-controls fade-up delay-1">
+      <button id="sort-popular" class="btn btn-sort active">Most Popular</button>
+      <button id="sort-recent" class="btn btn-sort">Most Recent</button>
+    </div>
+
+    <div id="gallery-stats" class="gallery-stats fade-up delay-2" style="display: none;">
+      <p><strong id="total-cards-count">0</strong> cards shared</p>
+    </div>
+
+    <div id="gallery-grid" class="gallery-grid card-appear">
+      <!-- Cards will be loaded here dynamically -->
+    </div>
+
+    <div id="gallery-loading" style="display: none; text-align: center; padding: 40px;">
+      <p>Loading cards...</p>
+    </div>
+
+    <div id="gallery-empty" style="display: none; text-align: center; padding: 60px 20px;">
+      <h3>No cards in the gallery yet</h3>
+      <p>Be the first to <a href="generate.html">generate and share a card</a>!</p>
+    </div>
+
+    <div class="load-more-container fade-up" style="display: none;">
+      <button id="load-more-btn" class="btn">Load More Cards</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fakémon Card Simulator. Not affiliated with Nintendo or The Pokémon Company.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>

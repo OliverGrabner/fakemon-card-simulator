@@ -1,8 +1,14 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+from sqlalchemy import desc
+from pydantic import BaseModel
 from pathlib import Path
+from datetime import datetime, timezone
+from contextlib import asynccontextmanager
 
 from models import Generator, nz
+from database import get_db, init_db, GeneratedCard
 import torch
 import random
 
@@ -11,9 +17,17 @@ import base64
 from PIL import Image
 import os
 
-app = FastAPI()
 
-# Get allowed origins from environment variable, fallback to localhost for devlop
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Initialize database
+    init_db()
+    print("Backend ready")
+    yield
+    # TODO: possible cleanup needed 
+
+
+app = FastAPI(lifespan=lifespan)
 ALLOWED_ORIGINS = os.getenv("FRONTEND_URL", "http://localhost:5500,http://127.0.0.1:5500").split(",")
 
 app.add_middleware(
@@ -72,4 +86,79 @@ def generate_card():
     return {
         "image": f"data:image/png;base64,{img_base64}",
         "rarity": get_random_rarity()
+    }
+
+@app.post("/api/gallery/share")
+def share_card(request: dict, db: Session = Depends(get_db)):
+    """Save a generated card to the public gallery"""
+    
+    card = GeneratedCard(
+        image_data=request["image_data"],
+        upvotes=0,
+        created_at=datetime.now()
+    )
+    
+    db.add(card)
+    db.commit()
+    db.refresh(card)
+
+    return {
+        "id": card.id,
+        "image": f"data:image/png;base64,{card.image_data}",
+        "upvotes": card.upvotes,
+        "created_at": card.created_at,
+        "message": "Card shared to gallery successfully!"
+    }
+
+
+@app.get("/api/gallery")
+def get_gallery(sort_by: str = "popular", page: int = 1, limit: int = 50, db: Session = Depends(get_db)):
+    """Get paginated gallery of all shared cards"""
+    if sort_by not in ["popular", "recent"]:
+        raise HTTPException(status_code=400, detail="sort_by must be 'popular' or 'recent'")
+
+    if limit > 100:
+        limit = 100
+
+    query = db.query(GeneratedCard)
+
+    if sort_by == "popular":
+        query = query.order_by(desc(GeneratedCard.upvotes), desc(GeneratedCard.created_at))
+    else:
+        query = query.order_by(desc(GeneratedCard.created_at))
+
+    total = query.count()
+    offset = (page - 1) * limit
+    cards = query.offset(offset).limit(limit).all()
+
+    return {
+        "cards": [
+            {
+                "id": card.id,
+                "image": f"data:image/png;base64,{card.image_data}",
+                "upvotes": card.upvotes,
+                "created_at": card.created_at
+            }
+            for card in cards
+        ],
+        "total": total,
+        "has_more": (page * limit) < total
+    }
+
+
+@app.post("/api/gallery/{card_id}/upvote")
+def upvote_card(card_id: int, db: Session = Depends(get_db)):
+    """Upvote a card in the gallery"""
+    card = db.query(GeneratedCard).filter(GeneratedCard.id == card_id).first()
+
+    if not card:
+        raise HTTPException(status_code=404, detail="Card not found")
+
+    card.upvotes += 1
+    db.commit()
+
+    return {
+        "success": True,
+        "new_upvote_count": card.upvotes,
+        "message": "Upvote added successfully"
     }

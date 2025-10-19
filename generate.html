@@ -29,6 +29,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="game.html">Open Pack</a></li>
         <li><a href="generate.html">Generate</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="favorites.html">Favorites</a></li>
         <li><a href="index.html#about">About</a></li>
       </ul>
@@ -51,7 +52,15 @@
         </div>
 
         <div class="fade-up delay-2">
-          <button id="generate-btn" class="btn">Generate Card</button>
+          <button id="generate-btn" class="btn">Generate New Card</button>
+        </div>
+
+        <div class="fade-up delay-2" style="margin-top: 16px;">
+          <button id="share-to-gallery-btn" class="btn btn-secondary" style="display: none;">Share to Gallery</button>
+        </div>
+
+        <div id="share-confirmation" class="fade-up delay-2" style="display: none; margin-top: 16px; color: #10b981; font-weight: 600;">
+          ✓ Shared to Gallery!
         </div>
 
         <div id="loading" class="fade-up delay-2" style="display: none; margin-top: 20px;">
