@@ -4,11 +4,9 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
 
-# Get database URL from environment variable
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Render provides DATABASE_URL starting with postgres://
-# SQLAlchemy 2.0 requires postgresql://
+# Weird mixup fix between SQLAlchemy and Render 
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
@@ -18,7 +16,7 @@ engine = create_engine(
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10,
-    echo=False
+    echo=True
 )
 
 # Session factory
@@ -29,15 +27,16 @@ Base = declarative_base()
 
 
 # Database Model
-class GeneratedCard(Base):
+class GeneratedCard(Base): 
+    # Table : id (int), image (base64), upvotes (int), created (datetime)
     __tablename__ = "generated_cards"
 
     id = Column(Integer, primary_key=True, index=True)
     image_data = Column(Text, nullable=False)
     upvotes = Column(Integer, default=0, index=True)
-    created_at = Column(TIMESTAMP, default=datetime.utcnow, index=True)
+    created_at = Column(TIMESTAMP, default=datetime.now(), index=True)
 
-    # Indexes for performance
+    # Sort by upvotes vs created date indexing performance optimization
     __table_args__ = (
         Index('idx_upvotes_desc', upvotes.desc()),
         Index('idx_created_at_desc', created_at.desc()),
@@ -48,7 +47,7 @@ class GeneratedCard(Base):
 def init_db():
     """Create all tables in the database"""
     Base.metadata.create_all(bind=engine)
-    print("✓ Database tables created")
+    print("Database tables created")
 
 
 # Dependency for getting database session

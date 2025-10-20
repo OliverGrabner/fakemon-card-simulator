@@ -97,7 +97,7 @@ def share_card(request: dict, db: Session = Depends(get_db)):
         upvotes=0,
         created_at=datetime.now()
     )
-    
+
     db.add(card)
     db.commit()
     db.refresh(card)
@@ -114,6 +114,7 @@ def share_card(request: dict, db: Session = Depends(get_db)):
 @app.get("/api/gallery")
 def get_gallery(sort_by: str = "popular", page: int = 1, limit: int = 50, db: Session = Depends(get_db)):
     """Get paginated gallery of all shared cards"""
+
     if sort_by not in ["popular", "recent"]:
         raise HTTPException(status_code=400, detail="sort_by must be 'popular' or 'recent'")
 
@@ -149,16 +150,28 @@ def get_gallery(sort_by: str = "popular", page: int = 1, limit: int = 50, db: Se
 @app.post("/api/gallery/{card_id}/upvote")
 def upvote_card(card_id: int, db: Session = Depends(get_db)):
     """Upvote a card in the gallery"""
+    return vote_card(card_id, 1, db)
+
+
+@app.post("/api/gallery/{card_id}/downvote")
+def downvote_card(card_id: int, db: Session = Depends(get_db)):
+    """Downvote a card in the gallery"""
+    return vote_card(card_id, -1, db)
+
+
+def vote_card(card_id: int, delta: int, db: Session):
+    """Helper function to handle voting (upvote or downvote)"""
     card = db.query(GeneratedCard).filter(GeneratedCard.id == card_id).first()
 
     if not card:
         raise HTTPException(status_code=404, detail="Card not found")
 
-    card.upvotes += 1
+    card.upvotes += delta
     db.commit()
 
+    action = "Upvote" if delta > 0 else "Downvote"
     return {
         "success": True,
         "new_upvote_count": card.upvotes,
-        "message": "Upvote added successfully"
+        "message": f"{action} added successfully"
     }

@@ -36,11 +36,9 @@ async function loadGallery(append = false) {
         }
 
         const data = await response.json();
-
-        // Hide loading indicator
         loadingIndicator.style.display = 'none';
 
-        // Show stats
+        // stats
         if (data.total > 0) {
             totalCardsCount.textContent = data.total;
             statsDiv.style.display = 'block';
@@ -101,15 +99,20 @@ function createGalleryCard(card) {
         </div>
         <div class="card-upvote-section">
             <button class="upvote-btn" data-card-id="${card.id}" aria-label="Upvote card">
-                <span class="heart-icon">❤</span>
+                <span class="material-symbols-outlined">thumb_up</span>
             </button>
             <span class="upvote-count" data-card-id="${card.id}">${card.upvotes}</span>
+            <button class="downvote-btn" data-card-id="${card.id}" aria-label="Downvote card">
+                <span class="material-symbols-outlined">thumb_down</span>
+            </button>
         </div>
     `;
 
-    // Add upvote event listener
+    // Add upvote and downvote event listeners
     const upvoteBtn = cardDiv.querySelector('.upvote-btn');
+    const downvoteBtn = cardDiv.querySelector('.downvote-btn');
     upvoteBtn.addEventListener('click', () => upvoteCard(card.id));
+    downvoteBtn.addEventListener('click', () => downvoteCard(card.id));
 
     return cardDiv;
 }
@@ -156,6 +159,48 @@ async function upvoteCard(cardId) {
     }
 }
 
+// Downvote a card
+async function downvoteCard(cardId) {
+    const downvoteBtn = document.querySelector(`.downvote-btn[data-card-id="${cardId}"]`);
+    const upvoteCount = document.querySelector(`.upvote-count[data-card-id="${cardId}"]`);
+
+    // Prevent double-clicking
+    if (downvoteBtn.classList.contains('downvoting')) return;
+
+    downvoteBtn.classList.add('downvoting');
+    downvoteBtn.disabled = true;
+
+    try {
+        const response = await fetch(`${API_URL}/api/gallery/${cardId}/downvote`, {
+            method: 'POST'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to downvote: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Update upvote count
+        upvoteCount.textContent = data.new_upvote_count;
+
+        // Add visual feedback
+        downvoteBtn.classList.add('downvoted');
+        upvoteCount.classList.add('pulse');
+
+        setTimeout(() => {
+            upvoteCount.classList.remove('pulse');
+        }, 300);
+
+    } catch (error) {
+        console.error('Error downvoting card:', error);
+        // Could show a toast notification here
+    } finally {
+        downvoteBtn.classList.remove('downvoting');
+        downvoteBtn.disabled = false;
+    }
+}
+
 // Change sort order
 function changeSortOrder(sortBy) {
     if (currentSort === sortBy) return;
@@ -178,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load initial gallery
     loadGallery();
 
-    // Add event listener for sort dropdown
     const sortSelect = document.getElementById('sort-select');
     const loadMoreBtn = document.getElementById('load-more-btn');
 
