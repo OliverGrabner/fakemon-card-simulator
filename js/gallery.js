@@ -163,10 +163,6 @@ function changeSortOrder(sortBy) {
     currentSort = sortBy;
     currentPage = 1;
 
-    // Update button states
-    document.getElementById('sort-popular').classList.toggle('active', sortBy === 'popular');
-    document.getElementById('sort-recent').classList.toggle('active', sortBy === 'recent');
-
     // Reload gallery
     loadGallery(false);
 }
@@ -182,17 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load initial gallery
     loadGallery();
 
-    // Add event listeners for sort buttons
-    const sortPopularBtn = document.getElementById('sort-popular');
-    const sortRecentBtn = document.getElementById('sort-recent');
+    // Add event listener for sort dropdown
+    const sortSelect = document.getElementById('sort-select');
     const loadMoreBtn = document.getElementById('load-more-btn');
 
-    if (sortPopularBtn) {
-        sortPopularBtn.addEventListener('click', () => changeSortOrder('popular'));
-    }
-
-    if (sortRecentBtn) {
-        sortRecentBtn.addEventListener('click', () => changeSortOrder('recent'));
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            changeSortOrder(e.target.value);
+        });
     }
 
     if (loadMoreBtn) {

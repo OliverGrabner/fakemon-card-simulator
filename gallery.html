@@ -40,12 +40,14 @@
   <section class="gallery-section">
     <div class="gallery-header fade-up">
       <h1>Community Gallery</h1>
-      <p>Cards shared by users from around the world</p>
+      <p>Generations saved by the users in the community  </p>
     </div>
 
     <div class="gallery-controls fade-up delay-1">
-      <button id="sort-popular" class="btn btn-sort active">Most Popular</button>
-      <button id="sort-recent" class="btn btn-sort">Most Recent</button>
+      <select id="sort-select" class="sort-dropdown">
+        <option value="popular">Most Popular</option>
+        <option value="recent">Most Recent</option>
+      </select>
     </div>
 
     <div id="gallery-stats" class="gallery-stats fade-up delay-2" style="display: none;">

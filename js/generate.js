@@ -53,8 +53,10 @@ async function generateCard() {
         cardContainer.appendChild(cardDiv);
         attachCardEventListeners();
 
-        // Show the "Share to Gallery" button after successful generation
+        // Show and reset the "Share to Gallery" button after successful generation
         shareButton.style.display = 'block';
+        shareButton.disabled = false;
+        shareButton.textContent = 'Share to Gallery';
 
     } catch (error) {
         console.error('Error generating card:', error);

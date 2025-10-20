@@ -963,7 +963,7 @@ footer p {
 
 .gallery-header {
   text-align: center;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-6);
 }
 
 .gallery-header h1 {
@@ -981,30 +981,36 @@ footer p {
 .gallery-controls {
   display: flex;
   justify-content: center;
-  gap: var(--space-3);
+  align-items: center;
   margin-bottom: var(--space-8);
-  flex-wrap: wrap;
 }
 
-.btn-sort {
+.sort-dropdown {
   background: var(--color-white);
   color: var(--color-black);
   border: 2px solid var(--color-black);
+  border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-6);
   font-size: 16px;
   font-weight: 600;
-  transition: all 0.2s;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 150ms ease;
+  box-shadow: var(--shadow-weighted);
 }
 
-.btn-sort:hover {
-  background: var(--color-gray-100);
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+.sort-dropdown:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
-.btn-sort.active {
-  background: var(--color-black);
-  color: var(--color-white);
+.sort-dropdown:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.sort-dropdown:focus {
+  outline: none;
 }
 
 .btn-secondary {
