@@ -1,4 +1,4 @@
-let currentCardImageData = null; // Store current card's base64 data for sharing
+let currentCardImageData = null; // Store current cards base64 data for sharing
 
 async function generateCard() {
     const button = document.getElementById('generate-btn');
