@@ -4,20 +4,35 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import os
 
+# Load .env file only if running locally
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Weird mixup fix between SQLAlchemy and Render 
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-# Create engine
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
-    echo=True
-)
+if DATABASE_URL and "sqlite" in DATABASE_URL:
+    # SQLite (testing) - minimal config with threading override for tests
+    engine = create_engine(
+        DATABASE_URL,
+        echo=True,
+        connect_args={"check_same_thread": False}  # Allow FastAPI TestClient to work
+    )
+else:
+    # PostgreSQL (production) - with connection pooling
+    engine = create_engine(
+        DATABASE_URL,
+        pool_pre_ping=True,
+        pool_size=5,
+        max_overflow=10,
+        echo=True
+    )
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

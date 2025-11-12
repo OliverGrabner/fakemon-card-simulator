@@ -36,6 +36,8 @@ The cards aren't super crisp because I trained the model on my laptop (NVIDIA RT
 **Backend (Render):**
 - FastAPI server running PyTorch for model inference
 - Runs random noise through the Generator network, and returns a base64 image
+- PostgreSQL database for community gallery (stores shared cards, upvotes, timestamps)
+- SQLAlchemy ORM with custom indexes optimized for "Popular" and "Recent" sorting
 - Dockerized and deployed on Render's free tier
 - Assigns a random rarity (Common, Uncommon, Rare, Epic, Legendary)
 
@@ -50,14 +52,38 @@ I originally tried deploying everything to Vercel, but ran into their 250MB serv
 
 - **Frontend:** HTML5, CSS3, JavaScript
 - **Backend:** Python, FastAPI, PyTorch, Uvicorn
+- **Database:** PostgreSQL (production), SQLite (testing)
+- **ORM:** SQLAlchemy 2.0
 - **ML Model:** DCGAN trained with PyTorch
 - **Deployment:** Vercel (frontend) + Render (backend)
 - **Image Processing:** Pillow/PIL
 - **Containerization:** Docker
+- **Testing:** Pytest with 42 tests
 
 **API Endpoints:**
 - `GET /` - Health check endpoint (returns `{"status": "online"}`)
 - `GET /api/card/generate` - Generates card from random latent vector (returns base64 image + rarity)
+- `GET /api/gallery` - Fetches paginated gallery with sorting options (popular/recent)
+- `POST /api/gallery/share` - Saves a generated card to the public gallery
+- `POST /api/gallery/{card_id}/upvote` - Upvotes a card in the gallery
+- `POST /api/gallery/{card_id}/downvote` - Downvotes a card in the gallery
+
+## Testing
+
+The backend has a comprehensive test suite covering everything from basic utility functions to full API integration tests. I wanted to make sure the rarity system works correctly, the database handles sorting efficiently, and all the endpoints return the right data. (I also want to be able to say that I did testing in this project (more professional 😅))
+
+**Test Suite Stats:**
+- 42 total tests (100% passing)
+- 5 unit tests - Rarity probability distribution (verifies 70% Common, 15% Uncommon, etc.)
+- 9 database tests - CRUD operations, sorting by upvotes/date, pagination
+- 28 API integration tests - All endpoints including generation, gallery CRUD, and voting system
+- Runs in ~14 seconds using SQLite and mocked PyTorch models
+
+**Run tests locally:**
+```bash
+cd backend
+pytest tests/ -v
+```
 
 ## Challenges I Ran Into
 

@@ -26,6 +26,10 @@ wheels/
 # Model checkpoints (too large for Git)
 backend/checkpoints/*.pth
 
+# Test databases
+test.db
+*.db-journal
+
 # IDE
 .vscode/
 .idea/
@@ -40,3 +44,6 @@ Thumbs.db
 # Environment variables
 .env
 .vercel
+
+# Shhh
+/backend/populate_gallery.py
